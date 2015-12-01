@@ -47,6 +47,22 @@
 			delete keysDown[e.keyCode];
 		});
 		console.log(hero)
+
+		//Function that checks to make sure the hero is within the border of the trees
+		var checkBoundaries = function(){
+			if(heroObj.x < 0 + 30){
+				heroObj.x = 30;
+			}else if(heroObj.x > canvas.width - 30 - hero.width){
+				heroObj.x = canvas.width - hero.width - 30;
+			}
+			if(heroObj.y < 0 + 28){
+				heroObj.y = 28;
+			}else if(heroObj.y > canvas.height - 32 - hero.height){
+				heroObj.y = canvas.height - hero.height - 32;
+			}
+		}
+
+
 		// Update Function
 		// This will update the canvas images that are moving
 		// It will change the hero's location and eventually , check to see if he touched monster
@@ -64,17 +80,7 @@
 			if(39 in keysDown){
 				heroObj.x += heroObj.speed * modifier;
 			}
-			if(heroObj.x < 0 + 30){
-				heroObj.x = 30;
-			}else if(heroObj.x > canvas.width - 30 - hero.width){
-				heroObj.x = canvas.width - hero.width - 30;
-			}
-			if(heroObj.y < 0 + 28){
-				heroObj.y = 28;
-			}else if(heroObj.y > canvas.height - 32 - hero.height){
-				heroObj.y = canvas.height - hero.height - 32;
-			}
-
+			checkBoundaries();
 		}
 		//Draw our stuff
 		var render = function(){
