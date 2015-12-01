@@ -32,6 +32,10 @@
 			y: 224
 		};
 
+		var goblin = new Image();
+		goblin.src = "goblin.png";
+		var goblinObj = {}
+
 		// Handler for keyboard Actions
 		var keysDown = {};
 
@@ -42,7 +46,7 @@
 		addEventListener('keyup', function(e){
 			delete keysDown[e.keyCode];
 		});
-
+		console.log(hero)
 		// Update Function
 		// This will update the canvas images that are moving
 		// It will change the hero's location and eventually , check to see if he touched monster
@@ -51,12 +55,33 @@
 				//User pressed up
 				heroObj.y -= heroObj.speed * modifier;
 			}
+			if(40 in keysDown){
+				heroObj.y += heroObj.speed * modifier;
+			}
+			if(37 in keysDown){
+				heroObj.x -= heroObj.speed * modifier;
+			}
+			if(39 in keysDown){
+				heroObj.x += heroObj.speed * modifier;
+			}
+			if(heroObj.x < 0 + 30){
+				heroObj.x = 30;
+			}else if(heroObj.x > canvas.width - 30 - hero.width){
+				heroObj.x = canvas.width - hero.width - 30;
+			}
+			if(heroObj.y < 0 + 28){
+				heroObj.y = 28;
+			}else if(heroObj.y > canvas.height - 32 - hero.height){
+				heroObj.y = canvas.height - hero.height - 32;
+			}
+
 		}
 		//Draw our stuff
 		var render = function(){
 			if(bgReady){
 				ctx.drawImage(bgImage, 0, 0);
 			}
+			ctx.drawImage(goblin, 100, 100);
 			ctx.drawImage(hero, heroObj.x, heroObj.y)
 		}
 
